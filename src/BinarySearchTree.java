@@ -1,6 +1,7 @@
 /**
  * JPSE
- * Date: 2/26/2024
+ * Date Due: 2/26/2024
+ * Date Completed: 3/5/2024
  * Collaborators: N/A
  **/
 public class BinarySearchTree<Key extends Comparable<Key>, Value> {
@@ -30,8 +31,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
     }
 
     //recursive put wrapper
-    public void put(Key key, Value value) {
-        root = put(root, key, value);
+    public void put(Key key, Value value) {root = put(root, key, value);
     }
 
     //recursive put
@@ -41,6 +41,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         if (root == null) {
             return new Node<Key, Value>(key, val, 1);
         }
+        return n;
     }
 
     //recursive get wrapper
@@ -58,7 +59,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         int j = key.compareTo(n.getKey());
         if (j < 0) {
             return get(n.getLeft(), key);
-        } else if (i > 0) {
+        } else if (j > 0) {
             return get(n.getRight(), key);
         } else {
             return n.getValue();
@@ -97,7 +98,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
 
     //returns the node at the left most left branch of n
     private Node<Key, Value> min(Node<Key, Value> n) {
-
+        if (n.getLeft() == null) {
+            return n;
+        } else {
+            return min(n.getLeft());
+        }
     }
 
     public Key max() {
@@ -110,7 +115,11 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
 
     //returns the node at the right most right branch of n
     private Node<Key, Value> max(Node<Key, Value> n) {
-
+        if (n.getRight() == null) {
+            return n;
+        } else {
+            return max(n.getRight());
+        }
     }
 
     public String toString() {
